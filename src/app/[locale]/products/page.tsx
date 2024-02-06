@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridCellParams, GridRowParams } from '@mui/x-data-grid';
-import { Card, CardHeader, CardContent, Box, IconButton, TextField } from '@mui/material';
-import { Settings } from '@mui/icons-material';
+import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
+import { Card, CardHeader, CardContent, Box, TextField } from '@mui/material';
 import NewButton from '@/components/molecules/create_button/create_button';
 import { useTranslations } from "next-intl";
 //interface for the product
@@ -52,7 +51,7 @@ const ProductsPage = () => {
         const response = await fetch('https://apiraphaeldoucet.onrender.com/products');
         const data = await response.json();
 
-        const filteredProducts = data.products.filter((product) =>
+        const filteredProducts = data.products.filter((product: { title: string; }) =>
           product.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         
@@ -76,7 +75,7 @@ const ProductsPage = () => {
     window.location.href = `/products/${params.id}`;
   };
 //handling the change of the search query
-  const handleSearchQueryChange = (event) => {
+  const handleSearchQueryChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSearchQuery(event.target.value);
   };
 //returning the page
