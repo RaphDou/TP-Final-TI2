@@ -64,12 +64,12 @@ const ProductsPage = () => {
     fetchProducts();
   }, [searchQuery]);
 //mapping for the data grid
-  const rows = products.map((product) => ({
-    id: product._id,
-    title: product.title,
-    description: product.description,
-    price: product.price,
-  }));
+const rows = products.map((product) => ({
+  id: product._id,
+  title: product.title,
+  description: product.description,
+  price: product.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
+}));
 //handling the click on the row
   const handleRowClick = (params: GridRowParams) => {
     window.location.href = `/products/${params.id}`;
